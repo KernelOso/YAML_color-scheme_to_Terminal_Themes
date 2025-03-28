@@ -159,7 +159,7 @@ for file in *.yaml *.yml; do
 [colors.primary]
 foreground  =       "#$foreground"
 background  =       "#$background"
-cursor      =       "#$cursor"
+#cursor      =       "#$cursor"
 
 [colors.normal]
 black       =       "#$b_black"

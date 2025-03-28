@@ -1,6 +1,5 @@
 # YAML color-scheme to Terminal Themes
 
-![banner](./README_ASSETS/banner.png)
 
 A basic YAML color-scheme to Terminal Themes – Bash script.
 
