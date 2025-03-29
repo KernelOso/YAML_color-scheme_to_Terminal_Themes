@@ -312,6 +312,52 @@ EOF
 EOF
 
 
+    #______     _       _     _____                   _ _       
+    #| ___ \   (_)     | |   |_   _|                 (_) |      
+    #| |_/ / __ _ _ __ | |_    | | ___ _ __ _ __ ___  _| |_ ___ 
+    #|  __/ '__| | '_ \| __|   | |/ _ \ '__| '_ ` _ \| | __/ _ \
+    #| |  | |  | | | | | |_    | |  __/ |  | | | | | | | ||  __/
+    #\_|  |_|  |_|_| |_|\__|   \_/\___|_|  |_| |_| |_|_|\__\___|
+    cat > "$output_Termite" <<EOF
+[colors]
+
+# special
+foreground      = #$foreground
+cursor          = #$cursor
+background      = #$background
+
+# black
+color0  = #$b_black
+color8  = #$l_black
+
+# red
+color1  = #$b_red
+color9  = #$l_red
+
+# green
+color2  = #$b_green
+color10 = #$l_green
+
+# yellow
+color3  = #$b_yellow
+color11 = #$l_yellow
+
+# blue
+color4  = #$b_blue
+color12 = #$l_blue
+
+# magenta
+color5  = #$b_magenta
+color13 = #$l_magenta
+
+# cyan
+color6  = #$b_cyan
+color14 = #$l_cyan
+
+# white
+color7  = #$b_white
+color15 = #$l_white
+EOF
 
     echo "${file} Procesed!"
 
