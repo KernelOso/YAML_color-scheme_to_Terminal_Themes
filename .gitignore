@@ -9,3 +9,9 @@ test-gogh.toml
 test-ob16.oyml
 test-ob16.conf
 test-ob16.toml
+
+test.yaml
+base.yaml
+theme-kitty.conf
+theme-alacritty.toml
+theme-xresources.Xresources

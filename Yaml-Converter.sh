@@ -17,6 +17,12 @@ for file in *.yaml *.yml; do
 
     [ -f "$file" ] || continue 
 
+    output_alacritty="theme-alacritty.toml"
+    output_kitty="theme-kitty.conf"
+    output_OsoBase16="base.yaml"
+    output_Xreources="theme-xresources.Xresources"
+    output_Termite="theme-termite"
+
 
     # _____            _      ______                __    ____ 
     #|  _  |          ( )     | ___ \              /  |  / ___|
@@ -27,9 +33,7 @@ for file in *.yaml *.yml; do
     # Oso's Base16
     if [[ ! $(yq -r '.b_black' "$file" ) == "null" ]]; then
 
-        output_alacritty="theme-alacritty.toml"
-        output_kitty="theme-kitty.conf"
-        output_OsoBase16="base.yaml"
+        
         
         background=$(yq -r '.background' "$file" )
         foreground=$(yq -r '.foreground' "$file" )
@@ -69,10 +73,6 @@ for file in *.yaml *.yml; do
     # Gogh Schemes      :   https://github.com/Gogh-Co/Gogh/tree/master/themes
     if [[ ! $(yq -r '.color_01' "$file" ) == "null" ]]; then
 
-        output_alacritty="theme-alacritty.toml"
-        output_kitty="theme-kitty.conf"
-        output_OsoBase16="base.yaml"
-
         background=$(yq -r '.background' "$file" | sed 's/^#//')
         foreground=$(yq -r '.foreground' "$file" | sed 's/^#//')
         cursor=$(yq -r '.cursor' "$file" | sed 's/^#//')
@@ -107,10 +107,6 @@ for file in *.yaml *.yml; do
     #\____/ \__,_|___/\___\___/\_____/
     # Base 16 Schemes   :   https://github.com/chriskempson/base16
     if [[ ! $(yq -r '.base00' "$file" ) == "null" ]]; then   
-                                 
-        output_alacritty="theme-alacritty.toml"
-        output_kitty="theme-kitty.conf"
-        output_OsoBase16="base.yaml"
 
         b_black=$(yq -r '.base00' "$file" )
         b_red=$(yq -r '.base01' "$file" )
@@ -155,7 +151,6 @@ for file in *.yaml *.yml; do
     #                                                            __/ |
     #                                                           |___/ 
     cat > "$output_alacritty" <<EOF
-
 [colors.primary]
 foreground  =       "#$foreground"
 background  =       "#$background"
@@ -194,7 +189,6 @@ EOF
     #                                          __/ |
     #                                         |___/ 
     cat > "$output_kitty" <<EOF
-
 # The basic colors
 foreground  #$foreground
 background  #$background
@@ -245,7 +239,6 @@ EOF
     #| |  | |  | | | | | |_  \ \_/ /\__ \ (_) | \__ \ | |_/ / (_| \__ \  __/| |_| \_/ |
     #\_|  |_|  |_|_| |_|\__|  \___/ |___/\___/  |___/ \____/ \__,_|___/\___\___/\_____/
     cat > "$output_OsoBase16" <<EOF
-
 background: "$background"
 foreground: "$foreground"
 cursor:     "$cursor"
@@ -269,6 +262,56 @@ l_cyan:     "$l_cyan"
 l_white:    "$l_white"
 
 EOF
+
+
+
+    #______     _       _    __   ________                                        
+    #| ___ \   (_)     | |   \ \ / /| ___ \                                       
+    #| |_/ / __ _ _ __ | |_   \ V / | |_/ /___  ___  ___  _   _ _ __ ___ ___  ___ 
+    #|  __/ '__| | '_ \| __|  /   \ |    // _ \/ __|/ _ \| | | | '__/ __/ _ \/ __|
+    #| |  | |  | | | | | |_  / /^\ \| |\ \  __/\__ \ (_) | |_| | | | (_|  __/\__ \
+    #\_|  |_|  |_|_| |_|\__| \/   \/\_| \_\___||___/\___/ \__,_|_|  \___\___||___/
+    cat > "$output_Xreources" <<EOF
+! special
+*.foreground:   #$foreground
+*.background:   #$background
+*.cursorColor:  #$cursor
+
+! black
+*.color0:       #$b_black
+*.color8:       #$l_black
+
+! red
+*.color1:       #$b_red
+*.color9:       #$l_red
+
+! green
+*.color2:       #$b_green
+*.color10:      #$l_green
+
+! yellow
+*.color3:       #$b_yellow
+*.color11:      #$l_yellow
+
+! blue
+*.color4:       #$b_blue
+*.color12:      #$l_blue
+
+! magenta
+*.color5:       #$b_magenta
+*.color13:      #$l_magenta
+
+! cyan
+*.color6:       #$b_cyan
+*.color14:      #$l_cyan
+
+! white
+*.color7:       #$b_white
+*.color15:      #$l_white
+
+EOF
+
+
 
     echo "${file} Procesed!"
 
