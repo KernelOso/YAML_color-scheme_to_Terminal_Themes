@@ -22,6 +22,7 @@ for file in *.yaml *.yml; do
     output_OsoBase16="base.yaml"
     output_Xreources="theme-xresources.Xresources"
     output_Termite="theme-termite"
+    output_Termux="theme-termux.properties"
 
 
     # _____            _      ______                __    ____ 
@@ -360,6 +361,38 @@ color14 = #$l_cyan
 color7  = #$b_white
 color15 = #$l_white
 EOF
+
+
+
+
+    #______     _       _     _____                              
+    #| ___ \   (_)     | |   |_   _|                             
+    #| |_/ / __ _ _ __ | |_    | | ___ _ __ _ __ ___  _   ___  __
+    #|  __/ '__| | '_ \| __|   | |/ _ \ '__| '_ ` _ \| | | \ \/ /
+    #| |  | |  | | | | | |_    | |  __/ |  | | | | | | |_| |>  < 
+    #\_|  |_|  |_|_| |_|\__|   \_/\___|_|  |_| |_| |_|\__,_/_/\_\
+    cat > "$output_Termux" <<EOF
+color0=#$b_black
+color1=#$b_red
+color2=#$b_green
+color3=#$b_yellow
+color4=#$b_blue
+color5=#$b_magenta
+color6=#$b_cyan
+color7=#$b_white
+color8=#$l_black
+color9=#$l_red
+color10=#$l_green
+color11=#$l_yellow
+color12=#$l_blue
+color13=#$l_magenta
+color14=#$l_cyan
+color15=#$l_white
+background=#$background
+foreground=#$foreground
+cursor=#$cursor
+EOF
+
 
     echo "${file} Procesed!"
 
