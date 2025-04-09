@@ -23,6 +23,7 @@ for file in *.yaml *.yml; do
     output_Xreources="theme-xresources.Xresources"
     output_Termite="theme-termite"
     output_Termux="theme-termux.properties"
+    output_LinuxTTY="theme-TTY.sh"
 
 
     # _____            _      ______                __    ____ 
@@ -393,6 +394,38 @@ foreground=#$foreground
 cursor=#$cursor
 EOF
 
+
+    # _     _                    _____ _______   __
+    #| |   (_)                  |_   _|_   _\ \ / /
+    #| |    _ _ __  _   ___  __   | |   | |  \ V / 
+    #| |   | | '_ \| | | \ \/ /   | |   | |   \ /  
+    #| |___| | | | | |_| |>  <    | |   | |   | |  
+    #\_____/_|_| |_|\__,_/_/\_\   \_/   \_/   \_/  
+    cat > "$output_LinuxTTY" <<EOF
+#!/bin/sh
+if [ "$TERM" = "linux" ]; then
+  /bin/echo -e "
+  \e]P0$b_black
+  \e]P1$b_red
+  \e]P2$b_green
+  \e]P3$b_yellow
+  \e]P4$b_blue
+  \e]P5$b_magenta
+  \e]P6$b_cyan
+  \e]P7$b_white
+  \e]P8$l_black
+  \e]P9$l_red
+  \e]PA$l_green
+  \e]PB$l_yellow
+  \e]PC$l_blue
+  \e]PD$l_magenta
+  \e]PE$l_cyan
+  \e]PF$l_white
+  "
+  # get rid of artifacts
+  clear
+fi
+EOF
 
     echo "${file} Procesed!"
 
