@@ -13,32 +13,17 @@ if ! command -v yq &> /dev/null; then
 
 fi 
 
-for theme_dir in ./*/; do 
+for file in *.yaml *.yml; do
 
-    if [ "$theme_dir" == "./0_template/" ]; then
-        continue
-    fi
+    [ -f "$file" ] || continue 
 
-    file=$theme_dir"base.yaml"
-
-    output_alacritty=$theme_dir"theme-alacritty.toml"
-    output_kitty=$theme_dir"theme-kitty.conf"
-    output_OsoBase16=$theme_dir"base.yaml"
-    output_Xreources=$theme_dir"theme-xresources.Xresources"
-    output_Termite=$theme_dir"theme-termite"
-    output_Termux=$theme_dir"theme-termux.properties"
-    output_LinuxTTY=$theme_dir"theme-TTY.sh"
-
-
-    #                        _____                  _                              
-    #                       |_   _|                | |                             
-    # ______ ______ ______    | | _ __  _ __  _   _| |_ ___   ______ ______ ______ 
-    #|______|______|______|   | || '_ \| '_ \| | | | __/ __| |______|______|______|
-    #                        _| || | | | |_) | |_| | |_\__ \                       
-    #                        \___/_| |_| .__/ \__,_|\__|___/                       
-    #                                  | |                                         
-    #                                  |_|                                         
-
+    output_alacritty="theme-alacritty.toml"
+    output_kitty="theme-kitty.conf"
+    output_OsoBase16="base.yaml"
+    output_Xreources="theme-xresources.Xresources"
+    output_Termite="theme-termite"
+    output_Termux="theme-termux.properties"
+    output_LinuxTTY="theme-TTY.sh"
 
 
     # _____            _      ______                __    ____ 
@@ -50,6 +35,7 @@ for theme_dir in ./*/; do
     # Oso's Base16
     if [[ ! $(yq -r '.b_black' "$file" ) == "null" ]]; then
 
+        
         
         background=$(yq -r '.background' "$file" )
         foreground=$(yq -r '.foreground' "$file" )
@@ -74,6 +60,7 @@ for theme_dir in ./*/; do
         l_white=$(yq -r '.l_white' "$file" )
 
     fi
+
 
 
 
@@ -152,7 +139,8 @@ for theme_dir in ./*/; do
     #                        \ \_/ / |_| | |_| |_) | |_| | |_\__ \                       
     #                         \___/ \__,_|\__| .__/ \__,_|\__|___/                       
     #                                        | |                                         
-    #                                        |_|        
+    #                                        |_|                                         
+
 
 
 
@@ -164,8 +152,7 @@ for theme_dir in ./*/; do
     #\_|  |_|  |_|_| |_|\__| \_| |_/_|\__,_|\___|_|  |_|\__|\__|\__, |
     #                                                            __/ |
     #                                                           |___/ 
-    if [ ! -e $output_alacritty ]; then 
-        cat > "$output_alacritty" <<EOF
+    cat > "$output_alacritty" <<EOF
 [colors.primary]
 foreground  =       "#$foreground"
 background  =       "#$background"
@@ -194,7 +181,6 @@ cyan        =       "#$l_cyan"
 white       =       "#$l_white"
 
 EOF
-    fi 
 
 
 
@@ -206,8 +192,7 @@ EOF
     #\_|  |_|  |_|_| |_|\__| \_| \_/_|\__|\__|\__, |
     #                                          __/ |
     #                                         |___/ 
-    if [ ! -e $output_kitty ]; then 
-        cat > "$output_kitty" <<EOF
+    cat > "$output_kitty" <<EOF
 # The basic colors
 foreground  #$foreground
 background  #$background
@@ -248,7 +233,6 @@ color7      #$b_white
 color15     #$l_white
 
 EOF
-    fi
 
 
 
@@ -258,8 +242,7 @@ EOF
     #|  __/ '__| | '_ \| __| | | | |/ __|/ _ \  / __| | ___ \/ _` / __|/ _ \| | | ___ \
     #| |  | |  | | | | | |_  \ \_/ /\__ \ (_) | \__ \ | |_/ / (_| \__ \  __/| |_| \_/ |
     #\_|  |_|  |_|_| |_|\__|  \___/ |___/\___/  |___/ \____/ \__,_|___/\___\___/\_____/
-    if [ ! -e $output_OsoBase16 ]; then 
-        cat > "$output_OsoBase16" <<EOF
+    cat > "$output_OsoBase16" <<EOF
 background: "$background"
 foreground: "$foreground"
 cursor:     "$cursor"
@@ -283,7 +266,6 @@ l_cyan:     "$l_cyan"
 l_white:    "$l_white"
 
 EOF
-    fi
 
 
 
@@ -293,8 +275,7 @@ EOF
     #|  __/ '__| | '_ \| __|  /   \ |    // _ \/ __|/ _ \| | | | '__/ __/ _ \/ __|
     #| |  | |  | | | | | |_  / /^\ \| |\ \  __/\__ \ (_) | |_| | | | (_|  __/\__ \
     #\_|  |_|  |_|_| |_|\__| \/   \/\_| \_\___||___/\___/ \__,_|_|  \___\___||___/
-    if [ ! -e $output_Xreources ]; then 
-        cat > "$output_Xreources" <<EOF
+    cat > "$output_Xreources" <<EOF
 ! special
 *.foreground:   #$foreground
 *.background:   #$background
@@ -333,8 +314,6 @@ EOF
 *.color15:      #$l_white
 
 EOF
-    fi
-
 
 
     #______     _       _     _____                   _ _       
@@ -343,7 +322,6 @@ EOF
     #|  __/ '__| | '_ \| __|   | |/ _ \ '__| '_ ` _ \| | __/ _ \
     #| |  | |  | | | | | |_    | |  __/ |  | | | | | | | ||  __/
     #\_|  |_|  |_|_| |_|\__|   \_/\___|_|  |_| |_| |_|_|\__\___|
-    if [ ! -e $output_Termite ]; then 
     cat > "$output_Termite" <<EOF
 [colors]
 
@@ -384,7 +362,7 @@ color14 = #$l_cyan
 color7  = #$b_white
 color15 = #$l_white
 EOF
-    fi
+
 
 
 
@@ -394,8 +372,7 @@ EOF
     #|  __/ '__| | '_ \| __|   | |/ _ \ '__| '_ ` _ \| | | \ \/ /
     #| |  | |  | | | | | |_    | |  __/ |  | | | | | | |_| |>  < 
     #\_|  |_|  |_|_| |_|\__|   \_/\___|_|  |_| |_| |_|\__,_/_/\_\
-    if [ ! -e $output_Termux ]; then
-        cat > "$output_Termux" <<EOF
+    cat > "$output_Termux" <<EOF
 color0=#$b_black
 color1=#$b_red
 color2=#$b_green
@@ -416,8 +393,6 @@ background=#$background
 foreground=#$foreground
 cursor=#$cursor
 EOF
-    fi
-
 
 
     # _     _                    _____ _______   __
@@ -425,9 +400,8 @@ EOF
     #| |    _ _ __  _   ___  __   | |   | |  \ V / 
     #| |   | | '_ \| | | \ \/ /   | |   | |   \ /  
     #| |___| | | | | |_| |>  <    | |   | |   | |  
-    #\_____/_|_| |_|\__,_/_/\_\   \_/   \_/   \_/ 
-    if [ ! -e $output_LinuxTTY ]; then
-        cat > "$output_LinuxTTY" <<EOF
+    #\_____/_|_| |_|\__,_/_/\_\   \_/   \_/   \_/  
+    cat > "$output_LinuxTTY" <<EOF
 #!/bin/sh
 if [ "$TERM" = "linux" ]; then
   /bin/echo -e "
@@ -452,8 +426,7 @@ if [ "$TERM" = "linux" ]; then
   clear
 fi
 EOF
-    fi
 
-    echo "file : ${file} has been procesed!"
+    echo "${file} Procesed!"
 
 done

@@ -16,3 +16,5 @@ theme-kitty.conf
 theme-alacritty.toml
 theme-xresources.Xresources
 theme-termite
+
+test/*
